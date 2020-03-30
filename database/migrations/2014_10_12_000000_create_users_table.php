@@ -20,6 +20,12 @@ class CreateUsersTable extends Migration
             $table->text('avatar');
             $table->text('address');
             $table->string('city');
+            $table->string('email');
+            $table->string('password');
+            $table->timestamp('email_verified_at');
+            $table->string('google_account_id')->nullable();
+            $table->string('facebook_account_id')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

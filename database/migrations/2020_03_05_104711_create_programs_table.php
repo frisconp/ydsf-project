@@ -22,12 +22,12 @@ class CreateProgramsTable extends Migration
             $table->text('featured_image');
             $table->string('status');
             $table->unsignedBigInteger('branch_office_id');
-            $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('admin_id');
             $table->timestamps();
 
             // constraint
             $table->foreign('branch_office_id')->references('id')->on('branch_offices');
-            $table->foreign('staff_id')->references('id')->on('staffs');
+            $table->foreign('admin_id')->references('id')->on('admins');
         });
     }
 

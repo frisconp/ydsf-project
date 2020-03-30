@@ -18,11 +18,11 @@ class CreateEbooksTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('file');
-            $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('admin_id');
             $table->timestamps();
 
             // constraint
-            $table->foreign('staff_id')->references('id')->on('staffs');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->unique('title');
         });
     }
