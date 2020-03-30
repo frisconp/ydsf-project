@@ -20,11 +20,11 @@ class CreatePostsTable extends Migration
             $table->string('short_description', 150);
             $table->text('content');
             $table->text('featured_image');
-            $table->unsignedBigInteger('staff_id');
+            $table->unsignedBigInteger('admin_id');
             $table->timestamps();
 
             // constraint
-            $table->foreign('staff_id')->references('id')->on('staffs');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->unique('slug');
         });
     }

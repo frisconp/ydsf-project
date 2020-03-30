@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStaffsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateStaffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('staffs', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone_number');
-            $table->text('address');
-            $table->string('city');
+            $table->text('address')->nullable();
+            $table->string('phone_number', 15)->nullable();
             $table->string('email');
             $table->string('password');
-            $table->timestamp('last_login_at');
-            $table->unsignedBigInteger('branch_office_id');
+            $table->text('avatar')->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('branch_office_id')->nullable();
+            $table->rememberToken();
             $table->timestamps();
 
             // constraint
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('branch_office_id')->references('id')->on('branch_offices');
-            $table->unique('email');
-            $table->unique('phone_number');
         });
     }
 
@@ -39,6 +40,6 @@ class CreateStaffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staffs');
+        Schema::dropIfExists('admins');
     }
 }
