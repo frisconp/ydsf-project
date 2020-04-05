@@ -24,4 +24,5 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('dashboard');
 
     Route::resource('branch-office', 'BranchOfficeController');
+    Route::resource('admin', 'AdminController');
 });

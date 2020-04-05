@@ -12,10 +12,10 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="mb-0">Kantor Cabang</h3>
+                <h3 class="mb-0">Data Admin</h3>
             </div>
             <div class="col text-right">
-                <a href="{{ route('branch-office.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square mr-2"></i>Tambah</a>
+                <a href="{{ route('admin.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus-square mr-2"></i>Tambah</a>
             </div>
         </div>
     </div>
@@ -24,36 +24,36 @@
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Peran</th>
                     <th scope="col">Kantor</th>
-                    <th scope="col">Kota</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Telepon</th>
                     <th scope="col">Opsi</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($branchOffices->count() == 0)
+                @if ($admins->count() == 0)
                 <tr>
-                    <td colspan="5">Belum ada data kantor cabang, <a href="#">buat sekarang</a>.</td>
+                    <td colspan="5">Belum ada data admin/staff, <a href="#">buat sekarang</a>.</td>
                 </tr>
                 @else
-                @foreach ($branchOffices as $office)
+                @foreach ($admins as $admin)
                 <tr>
                     <th scope="row">
-                        {{ $office->title }}
+                        {{ $admin->name }}
                     </th>
                     <td>
-                        {{ $office->city }}
+                        {{ $admin->email }}
                     </td>
                     <td>
-                        {{ $office->address }}
+                        {{ $admin->role->title }}
                     </td>
                     <td>
-                        {{ $office->phone_number }}
+                        {{ $admin->office->title ?? '' }}
                     </td>
                     <td>
-                        <a href="{{ route('branch-office.edit', $office->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                        <a href="{{ route('branch-office.destroy', $office->id) }}" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Hapus</a>
+                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                        <a href="{{ route('admin.destroy', $admin->id) }}" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Hapus</a>
                     </td>
                 </tr>
                 @endforeach

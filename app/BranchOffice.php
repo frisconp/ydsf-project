@@ -9,4 +9,9 @@ class BranchOffice extends Model
     protected $fillable = [
         'title', 'address', 'city', 'phone_number'
     ];
+
+    public function admins()
+    {
+        return $this->hasMany('App\Admin');
+    }
 }

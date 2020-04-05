@@ -1,6 +1,6 @@
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link {{ set_active('dashboard') }}" href="#">
+        <a class="nav-link {{ set_active('dashboard') }}" href="{{ route('dashboard') }}">
             <i class="ni ni-tv-2 text-primary"></i>
             <span class="nav-link-text">Halaman Utama</span>
         </a>
@@ -9,7 +9,7 @@
     @if (Auth::user()->role_id == 1)
     {{-- Super Admin Menu --}}
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['branch-office.index', 'branch-office.create', 'branch-office.show', 'branch-office.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['branch-office.index', 'branch-office.create', 'branch-office.show', 'branch-office.edit']) }}" href="{{ route('branch-office.index') }}">
             <i class="ni ni-building text-primary"></i>
             <span class="nav-link-text">Kantor Cabang</span>
         </a>
@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['admin.index', 'admin.create', 'admin.show', 'admin.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['admin.index', 'admin.create', 'admin.show', 'admin.edit']) }}" href="{{ route('admin.index') }}">
             <i class="ni ni-badge text-primary"></i>
             <span class="nav-link-text">Data Admin</span>
         </a>
