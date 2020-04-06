@@ -19,6 +19,7 @@ class CreateProgramsTable extends Migration
             $table->text('description');
             $table->text('location');
             $table->integer('amount');
+            $table->date('held_on');
             $table->text('featured_image');
             $table->string('status');
             $table->unsignedBigInteger('branch_office_id');

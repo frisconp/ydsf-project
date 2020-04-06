@@ -15,7 +15,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['user.index', 'user.create', 'user.show', 'user.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['user.index', 'user.create', 'user.show', 'user.edit']) }}" href="{{ route('user.index') }}">
             <i class="ni ni-single-02 text-primary"></i>
             <span class="nav-link-text">Data Pengguna</span>
         </a>
@@ -31,7 +31,7 @@
     @if (Auth::user()->role_id == 2)
     {{-- Office Staff Menu --}}
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['program.index', 'program.create', 'program.show', 'program.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['program.index', 'program.create', 'program.show', 'program.edit']) }}" href="{{ route('program.index') }}">
             <i class="ni ni-archive-2 text-primary"></i>
             <span class="nav-link-text">Program</span>
         </a>

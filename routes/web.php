@@ -25,4 +25,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('branch-office', 'BranchOfficeController');
     Route::resource('admin', 'AdminController');
+    Route::resource('user', 'UserController');
+    Route::resource('program', 'ProgramController');
 });
