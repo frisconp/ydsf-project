@@ -22,7 +22,7 @@ class CreateProgramUpdatesTable extends Migration
             $table->timestamps();
 
             // constraint
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
         });
     }
 
