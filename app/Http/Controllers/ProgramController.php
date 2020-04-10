@@ -97,7 +97,8 @@ class ProgramController extends Controller
      */
     public function edit(Program $program)
     {
-        //
+        $title = 'Edit Program';
+        return view('pages.program.edit', compact('title', 'program'));
     }
 
     /**
@@ -109,7 +110,39 @@ class ProgramController extends Controller
      */
     public function update(Request $request, Program $program)
     {
-        //
+        $messages = [
+            'featured_image.image' => 'Format gambar yang diterima: JPG/PNG.',
+            'title.required' => 'Judul program tidak boleh kosong.',
+            'description.required' => 'Deskripsi program tidak boleh kosong.',
+            'location.required' => 'Lokasi tidak boleh kosong.',
+            'amount.required' => 'Jumlah donasi tidak boleh kosong.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'featured_image' => ['nullable', 'image'],
+            'title' => ['required'],
+            'description' => ['required'],
+            'location' => ['required'],
+            'amount' => ['required'],
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('program.edit', $program->id)->withErrors($validator)->withInput();
+        }
+
+        $program->title = $request->title;
+        $program->description = $request->description;
+        $program->held_on = $request->held_on;
+        $program->location = $request->location;
+        $program->amount = $request->amount;
+
+        if ($request->file('featured_image')) {
+            $program->featured_image = $request->file('featured_image')->store('programs');
+        }
+
+        $program->save();
+
+        return redirect()->route('program.index')->with('success', 'Berhasil memperbarui program '.$program->title.'.');
     }
 
     /**
@@ -120,6 +153,9 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $programTitle = $program->title;
+        $program->delete();
+
+        return redirect()->route('program.index')->with('success', 'Berhasil menghapus program '.$programTitle.'.');
     }
 }
