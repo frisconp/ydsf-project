@@ -17,7 +17,7 @@ class ProgramController extends Controller
     public function index()
     {
         $title = 'Program';
-        $programs = Program::where('id', Auth::user()->branch_office_id)->get();
+        $programs = Program::where('branch_office_id', Auth::user()->branch_office_id)->get();
 
         return view('pages.program.index', compact('title', 'programs'));
     }
@@ -86,7 +86,8 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        $title = 'Detail Program';
+        return view('pages.program.show', compact('title', 'program'));
     }
 
     /**

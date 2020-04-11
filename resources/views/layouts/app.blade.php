@@ -32,6 +32,8 @@
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+    <!-- Others CSS -->
+    @yield('style')
 </head>
 
 <body>
@@ -157,7 +159,7 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
-
+    <!-- Others JS -->
     @yield('script')
 </body>
 

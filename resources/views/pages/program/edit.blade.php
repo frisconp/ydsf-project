@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="held_on" class="form-control-label">Tanggal Pelaksanaan</label>
-                <input type="date" class="form-control" name="held_on" value="{{ old('held_on') ?? $program->held_on }}">
+                <input type="text" class="form-control datepicker" name="held_on" value="{{ old('held_on') ?? $program->held_on }}">
             </div>
             <div class="form-group">
                 <label for="description" class="form-control-label">Deskripsi</label>
@@ -47,8 +47,30 @@
 </div>
 @endsection
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.css') }}">
+@endsection
+
 @section('script')
+<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.js') }}"></script>
+<script src="{{ asset('assets/vendor/ckeditor5/ckeditor.js') }}"></script>
 <script>
+    ClassicEditor
+    .create(document.querySelector('#description'), {
+        removePlugins: [ 'Heading', 'Link' ],
+        toolbar: [ 'bold', 'italic' ]
+    })
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+    });
+
     function readImage(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
