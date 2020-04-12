@@ -3,20 +3,40 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title mb-0">{{ $program->title }}</h3>
+        <h3 class="card-title mb-0">Detail Program</h3>
     </div>
     <div class="card-body">
-        <div class="text-center mb-4">
-            <img src="{{ asset('storage/'.$program->featured_image) }}" height="300">
+        <table class="table table-bordered w-100">
+            <tr>
+                <td colspan="2" class="text-center">
+                    <img src="{{ asset('storage/'.$program->featured_image) }}" height="300">
+                </td>
+            </tr>
+            <tr>
+                <th>Judul</th>
+                <td>{{ $program->title }}</td>
+            </tr>
+            <tr>
+                <th>Tanggal Pelaksanaan</th>
+                <td>{{ $program->held_on }}</td>
+            </tr>
+            <tr>
+                <th>Lokasi</th>
+                <td>{{ $program->location }}</td>
+            </tr>
+            <tr>
+                <th>Status Program</th>
+                <td>
+                    <span class="badge badge-primary text-uppercase">{{ $program->status }}</span>
+                </td>
+            </tr>
+        </table>
+        <div class="my-4">
+            {!! $program->description !!}
         </div>
-        <div class="col-md-8 mx-auto">
-            <div id="description">
-                {!! $program->description !!}
-            </div>
-            <div>
-                <a href="{{ route('program.edit', $program->id) }}" class="btn btn-primary">Edit</a>
-                <a href="{{ route('program.destroy', $program->id) }}" data-toggle="modal" data-target="#deleteModal" class="btn btn-light">Hapus</a>
-            </div>
+        <div>
+            <a href="{{ route('program.edit', $program->id) }}" class="btn btn-primary"><i class="fas fa-edit mr-2"></i>Edit</a>
+            <a href="{{ route('program.destroy', $program->id) }}" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>
         </div>
     </div>
 </div>
@@ -40,8 +60,8 @@
                     Anda yakin ingin menghapus data ini?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Ya, hapus sekarang!</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle mr-2"></i>Batalkan</button>
+                    <button type="submit" class="btn btn-secondary"><i class="fas fa-trash-alt mr-2"></i>Ya, saya yakin!</button>
                 </div>
             </form>
         </div>
