@@ -14,11 +14,11 @@
             </div>
             <div class="form-group">
                 <label for="title" class="form-control-label">Judul Program</label>
-                <input type="text" class="form-control" name="title" placeholder="Masukkan judul program" value="{{ old('title') }}">
+                <input type="text" class="form-control" name="title" placeholder="Masukkan judul program" value="{{ old('title') }}" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="held_on" class="form-control-label">Tanggal Pelaksanaan</label>
-                <input type="text" class="form-control datepicker" name="held_on" placeholder="Pilih tanggal pelaksanaan" value="{{ old('held_on') }}">
+                <input type="text" class="form-control datepicker" name="held_on" placeholder="Pilih tanggal pelaksanaan" value="{{ old('held_on') }}" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="description" class="form-control-label">Deskripsi</label>
@@ -26,11 +26,11 @@
             </div>
             <div class="form-group">
                 <label for="location" class="form-control-label">Lokasi</label>
-                <input type="text" class="form-control" name="location" placeholder="Masukkan alamat lokasi" value="{{ old('location') }}">
+                <input type="text" class="form-control" name="location" placeholder="Masukkan alamat lokasi" value="{{ old('location') }}" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="amount" class="form-control-label">Jumlah donasi yang dibutuhkan</label>
-                <input type="text" class="form-control" name="amount" placeholder="Masukkan jumlah donasi" value="{{ old('amount') }}">
+                <input type="text" class="form-control" name="amount" placeholder="Masukkan jumlah donasi" value="{{ old('amount') }}" autocomplete="off">
             </div>
             <a href="{{ route('program.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
             <button type="submit" class="btn btn-default btn-icon">

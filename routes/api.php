@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'API\RegisterController@register');
 
+Route::get('/program/all', 'API\ProgramController@getAll');
+
 Route::group(['middleware' => ['auth:api']], function () {
     //
 });
