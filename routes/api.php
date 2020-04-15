@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'API\RegisterController@register');
 
-Route::get('/program/all', 'API\ProgramController@getAll');
+Route::group(['prefix' => 'program'], function () {
+    Route::get('/all', 'API\ProgramController@getAll');
+    Route::get('/{program}', 'API\ProgramController@getById');
+});
 
 Route::group(['middleware' => ['auth:api']], function () {
     //

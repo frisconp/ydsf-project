@@ -14,4 +14,9 @@ class ProgramController extends Controller
 
         return $this->sendResponse($programs, 'Data program berhasil didapatkan.');
     }
+
+    public function getById(Program $program)
+    {
+        return $this->sendResponse($program, 'Data program berhasil didapatkan.');
+    }
 }
