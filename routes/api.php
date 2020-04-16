@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register', 'API\RegisterController@register');
+Route::post('/login', 'API\LoginController@validateLogin');
 
 Route::group(['prefix' => 'program'], function () {
     Route::get('/all', 'API\ProgramController@getAll');
