@@ -17,7 +17,7 @@ class ProgramController extends Controller
     public function index()
     {
         $title = 'Program';
-        $programs = Program::where('branch_office_id', Auth::user()->branch_office_id)->get();
+        $programs = Program::where('branch_office_id', Auth::guard('admin')->user()->branch_office_id)->get();
 
         return view('pages.program.index', compact('title', 'programs'));
     }
@@ -71,8 +71,8 @@ class ProgramController extends Controller
         $program->featured_image = $request->file('featured_image')->store('programs');
         $program->held_on = $request->held_on;
         $program->status = 'menerima donasi';
-        $program->branch_office_id = Auth::user()->branch_office_id;
-        $program->admin_id = Auth::user()->id;
+        $program->branch_office_id = Auth::guard('admin')->user()->branch_office_id;
+        $program->admin_id = Auth::guard('admin')->user()->id;
         $program->save();
 
         return redirect()->route('program.index')->with('success', 'Berhasil menambahkan program baru.');
