@@ -41,6 +41,11 @@ class RegisterController extends BaseController
             'password' => Hash::make($request->password)
         ]);
 
-        return $this->sendResponse($user, 'Berhasil mendaftarkan akun.');
+        $data = [
+            'user' => $user,
+            'token' => $user->createToken('nApp')->accessToken,
+        ];
+
+        return $this->sendResponse($data, 'Berhasil mendaftarkan akun.');
     }
 }

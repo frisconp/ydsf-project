@@ -14,7 +14,14 @@ class LoginController extends Controller
         $remember = $request->filled('remember_me');
 
         if (Auth::attempt($credentials, $remember)) {
-            return $this->sendResponse(Auth::user(), 'Login berhasil.');
+            $user = Auth::user();
+
+            $data = [
+                'user' => $user,
+                'token' => $user->createToken('nApp')->accessToken,
+            ];
+
+            return $this->sendResponse($data, 'Login berhasil.');
         } else {
             return $this->sendError('Login gagal');
         }
