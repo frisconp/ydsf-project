@@ -6,7 +6,7 @@
         </a>
     </li>
 
-    @if (Auth::user()->role_id == 1)
+    @if (Auth::guard('admin')->user()->role_id == 1)
     {{-- Super Admin Menu --}}
     <li class="nav-item">
         <a class="nav-link {{ set_active(['branch-office.index', 'branch-office.create', 'branch-office.show', 'branch-office.edit']) }}" href="{{ route('branch-office.index') }}">
@@ -28,7 +28,7 @@
     </li>
     @endif
 
-    @if (Auth::user()->role_id == 2)
+    @if (Auth::guard('admin')->user()->role_id == 2)
     {{-- Office Staff Menu --}}
     <li class="nav-item">
         <a class="nav-link {{ set_active(['program.index', 'program.create', 'program.show', 'program.edit']) }}" href="{{ route('program.index') }}">

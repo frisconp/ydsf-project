@@ -17,7 +17,7 @@ Route::get('/login', 'LoginController@index')->name('login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
 Route::post('/login-auth', 'LoginController@authenticate');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth.admin']], function () {
     Route::get('/', function () {
         $title = 'Halaman Utama';
         return view('pages.dashboard', compact('title'));

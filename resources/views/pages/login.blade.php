@@ -143,6 +143,15 @@
                             </div>
                         </div> --}}
                         <div class="card-body px-lg-5 py-lg-5">
+                            @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Oops!</strong> {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
+
                             <div class="text-center text-muted mb-4">
                                 <small>Masukkan kredensial Anda di bawah.</small>
                             </div>
