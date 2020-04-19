@@ -21,7 +21,7 @@ class CreateDonationsTable extends Migration
             $table->string('donation_unique_number');
             $table->string('message');
             $table->integer('amount');
-            $table->text('proof_of_payment');
+            $table->text('proof_of_payment')->nullable();
             $table->string('status');
             $table->timestamps();
 
