@@ -22,6 +22,11 @@ Route::group(['prefix' => 'program'], function () {
     Route::get('/{program}', 'API\ProgramController@getById');
 });
 
-Route::group(['middleware' => ['auth:api']], function () {
-    //
+Route::group(['prefix' => 'branch-office'], function () {
+    Route::get('/all', 'API\BranchOfficeController@all');
+    Route::get('/{branchOffice}', 'API\BranchOfficeController@getById');
+});
+
+Route::group(['prefix' => 'donation'], function () {
+    Route::post('/add', 'API\DonationController@addDonation');
 });

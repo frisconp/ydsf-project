@@ -16,4 +16,9 @@ class Program extends Model
     {
         return $this->hasMany('App\ProgramUpdate');
     }
+
+    public function office()
+    {
+        return $this->belongsTo('App\BranchOffice', 'branch_office_id');
+    }
 }

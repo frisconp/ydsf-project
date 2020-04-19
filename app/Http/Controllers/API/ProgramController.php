@@ -12,7 +12,7 @@ class ProgramController extends Controller
     {
         $programs = Program::all();
 
-        return $this->sendResponse($programs, 'Data program berhasil didapatkan.');
+        return $this->sendResponse($programs->load('office'), 'Data program berhasil didapatkan.');
     }
 
     public function getById(Program $program)
