@@ -18,7 +18,10 @@ class CreateDonationAccountsTable extends Migration
             $table->string('name');
             $table->string('account_number');
             $table->string('type');
+            $table->unsignedBigInteger('branch_office_id');
             $table->timestamps();
+
+            $table->foreign('branch_office_id')->references('id')->on('branch_offices');
         });
     }
 

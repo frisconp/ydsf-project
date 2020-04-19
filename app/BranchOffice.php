@@ -14,4 +14,9 @@ class BranchOffice extends Model
     {
         return $this->hasMany('App\Admin');
     }
+
+    public function accounts()
+    {
+        return $this->hasMany('App\DonationAccount');
+    }
 }
