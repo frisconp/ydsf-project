@@ -2,12 +2,17 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Program extends Model
 {
-    public function getHeldOnAttribute($date)
+    protected $appends = [
+        'days_left', 'held_on_formatted'
+    ];
+
+    public function getHeldOnFormattedAttribute()
     {
         $days = [
             'Sunday' => 'Minggu',
@@ -34,9 +39,9 @@ class Program extends Model
             'Desember'
         ];
 
-        $dayName = date('l', strtotime($date));
+        $dayName = date('l', strtotime($this->held_on));
 
-        $splitedDate = explode('-', $date);
+        $splitedDate = explode('-', $this->held_on);
 
         return $days[$dayName] . ', ' . $splitedDate[2] . ' ' . $months[(int) $splitedDate[1]] . ' ' . $splitedDate[0];
     }
@@ -44,6 +49,13 @@ class Program extends Model
     public function getFeaturedImageAttribute($image)
     {
         return Storage::url($image);
+    }
+
+    public function getDaysLeftAttribute()
+    {
+        $today = Carbon::now();
+
+        return date_diff($today, Carbon::make($this->held_on))->days;
     }
 
     public function updates()
