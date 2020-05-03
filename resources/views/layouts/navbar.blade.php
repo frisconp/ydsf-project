@@ -49,13 +49,13 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['donation-account.index', 'donation-account.create', 'donation-account.show', 'donation-account.edit']) }}" href="{{ route('rekening.index') }}">
+        <a class="nav-link {{ set_active(['rekening.index', 'rekening.create', 'rekening.show', 'rekening.edit']) }}" href="{{ route('rekening.index') }}">
             <i class="ni ni-collection text-primary"></i>
             <span class="nav-link-text">Rekening Donasi</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['ebook.index', 'ebook.create', 'ebook.show', 'ebook.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['ebook.index', 'ebook.create', 'ebook.show', 'ebook.edit']) }}" href="{{ route('ebook.index') }}">
             <i class="ni ni-folder-17 text-primary"></i>
             <span class="nav-link-text">Majalah & Ebook</span>
         </a>

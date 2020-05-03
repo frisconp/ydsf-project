@@ -25,4 +25,9 @@ class Admin extends Authenticatable
     {
         return $this->belongsTo('App\BranchOffice', 'branch_office_id');
     }
+
+    public function ebooks()
+    {
+        return $this->hasMany('App\Ebook');
+    }
 }
