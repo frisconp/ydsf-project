@@ -9,7 +9,7 @@
         <table class="table table-bordered w-100">
             <tr>
                 <td colspan="2" class="text-center">
-                    <img src="{{ asset('storage/'.$post->featured_image) }}" height="300">
+                    <img src="{{ $post->featured_image }}" height="300">
                 </td>
             </tr>
             <tr>
