@@ -89,7 +89,9 @@ class EbookController extends Controller
      */
     public function edit(Ebook $ebook)
     {
-        //
+        $title = 'Edit Majalah';
+
+        return view('pages.ebook.edit', compact('title', 'ebook'));
     }
 
     /**
@@ -101,7 +103,34 @@ class EbookController extends Controller
      */
     public function update(Request $request, Ebook $ebook)
     {
-        //
+        $messages = [
+            'title.required' => 'Judul majalah tidak boleh kosong.',
+            'description.required' => 'Deskripsi majalah tidak boleh kosong.',
+            'file.file' => 'File Ebook tidah valid.',
+            'file.mimes' => 'File Ebook harus dalam format PDF, DOC, atau DOCX.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'title' => ['required'],
+            'description' => ['required'],
+            'file' => ['nullable', 'file', 'mimes:pdf,docx,doc'],
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('ebook.edit', $ebook->id)->withErrors($validator)->withInput();
+        }
+
+        $ebook->title = $request->title;
+        $ebook->description = $request->description;
+        $ebook->admin_id = Auth::guard('admin')->user()->id;
+
+        if ($request->file('file')) {
+            $ebook->file = $request->file('file')->store('ebooks');
+        }
+
+        $ebook->save();
+
+        return redirect()->route('ebook.index')->with('success', 'Berhasil memperbarui data majalah.');
     }
 
     /**
@@ -112,6 +141,9 @@ class EbookController extends Controller
      */
     public function destroy(Ebook $ebook)
     {
-        //
+        $ebookTitle = $ebook->title;
+        $ebook->delete();
+
+        return redirect()->route('ebook.index')->with('success', 'Berhasil menghapus majalah ' . $ebookTitle . '.');
     }
 }
