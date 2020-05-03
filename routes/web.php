@@ -29,4 +29,5 @@ Route::group(['middleware' => ['auth.admin']], function () {
     Route::resource('program', 'ProgramController');
     Route::resource('rekening', 'RekeningController');
     Route::resource('post', 'PostController');
+    Route::resource('ebook', 'EbookController');
 });
