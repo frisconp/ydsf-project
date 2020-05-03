@@ -60,7 +60,7 @@ class ProgramController extends Controller
         ], $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('program.index')->withErrors($validator)->withInput();
+            return redirect()->route('program.create')->withErrors($validator)->withInput();
         }
 
         $program = new Program();

@@ -43,7 +43,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ set_active(['post.index', 'post.create', 'post.show', 'post.edit']) }}" href="#">
+        <a class="nav-link {{ set_active(['post.index', 'post.create', 'post.show', 'post.edit']) }}" href="{{ route('post.index') }}">
             <i class="ni ni-single-copy-04 text-primary"></i>
             <span class="nav-link-text">Artikel</span>
         </a>
