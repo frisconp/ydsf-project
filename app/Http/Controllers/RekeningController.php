@@ -90,7 +90,7 @@ class RekeningController extends Controller
         $rekening->branch_office_id = Auth::guard('admin')->user()->branch_office_id;
         $rekening->save();
 
-        return redirect()->route('rekening.index')->with('success', 'Berhasil menambahkan rekening baru.');
+        return redirect()->route('rekening.index')->with('success', 'Berhasil mengedit rekening.');
     }
 
 

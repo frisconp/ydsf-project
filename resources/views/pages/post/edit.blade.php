@@ -3,10 +3,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title mb-0">Tambah Program</h3>
+        <h3 class="card-title mb-0">Edit Post</h3>
     </div>
     <div class="card-body">
-        @if ($errors->any())
+         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -15,37 +15,38 @@
                 </ul>
             </div>
         @endif
-        
-        <form action="{{ route('program.store') }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('post.update', $post->id) }}" enctype="multipart/form-data" method="POST">
+            @method('PUT')
             @csrf
-            <div class="form-group">
+           <div class="form-group">
                 <label for="featured_image" class="form-control-label">Gambar</label>
+                <div class="mb-2">
+                    <img src="{{ asset('storage/'.$post->featured_image) }}" alt="" id="image_preview" height="200">
+                </div>
                 <input type="file" class="form-control" name="featured_image" id="featured_image">
+                <small>* Kosongkan jika tidak diganti</small>
             </div>
             <div class="form-group">
-                <label for="title" class="form-control-label">Judul Program</label>
-                <input type="text" class="form-control" name="title" placeholder="Masukkan judul program" value="{{ old('title') }}" autocomplete="off">
+                <label for="title" class="form-control-label">Judul Post</label>
+                <input type="text" class="form-control" name="title" placeholder="Masukkan judul post" value="{{ old('title') ?? $post->title }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="held_on" class="form-control-label">Tanggal Pelaksanaan</label>
-                <input type="text" class="form-control datepicker" name="held_on" placeholder="Pilih tanggal pelaksanaan" value="{{ old('held_on') }}" autocomplete="off">
+                <label for="slug" class="form-control-label">Slug</label>
+                <input type="text" class="form-control" name="slug" placeholder="Masukkan slug post" value="{{ old('slug') ?? $post->slug }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="description" class="form-control-label">Deskripsi</label>
-                <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
+                <label for="short_description" class="form-control-label">Deskripsi Singkat</label>
+                <input type="text" class="form-control" name="short_description" placeholder="Masukkan Deskripsi singkat post" value="{{ old('short_description') ?? $post->short_description }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="location" class="form-control-label">Lokasi</label>
-                <input type="text" class="form-control" name="location" placeholder="Masukkan alamat lokasi" value="{{ old('location') }}" autocomplete="off">
+                <label for="content" class="form-control-label">Content</label>
+                <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') ?? $post->content }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="amount" class="form-control-label">Jumlah donasi yang dibutuhkan</label>
-                <input type="text" class="form-control" name="amount" placeholder="Masukkan jumlah donasi" value="{{ old('amount') }}" autocomplete="off">
-            </div>
-            <a href="{{ route('program.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
+            
+            <a href="{{ route('post.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
             <button type="submit" class="btn btn-default btn-icon">
                 <span class="btn-inner--icon"><i class="fas fa-plus-square"></i></span>
-                <span class="btn-inner--text">Tambah</span>
+                <span class="btn-inner--text">Perbarui</span>
             </button>
         </form>
     </div>
