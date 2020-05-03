@@ -27,6 +27,9 @@ Route::group(['prefix' => 'branch-office'], function () {
     Route::get('/{branchOffice}', 'API\BranchOfficeController@getById');
 });
 
+Route::resource('post', 'API\PostController');
+Route::resource('ebook', 'API\EbookController');
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'donation'], function () {
         Route::post('/add', 'API\DonationController@addDonation');
