@@ -45,6 +45,10 @@ class EbookController extends Controller
         $messages = [
             'title.required' => 'Judul majalah tidak boleh kosong.',
             'description.required' => 'Deskripsi majalah tidak boleh kosong.',
+            'edition.required' => 'Edisi Majalah tidak boleh kosong',
+            'publication_year.required' => 'Tahun Terbit tidak boleh kosong',
+            'thumbnail.required' => 'Harap pilih gambar untuk post ini.',
+            'thumbnail.image' => 'Format gambar yang diterima: JPG/PNG.',
             'file.required' => 'File Ebook harus dipilih terlebih dahulu.',
             'file.file' => 'File Ebook tidah valid.',
             'file.mimes' => 'File Ebook harus dalam format PDF, DOC, atau DOCX.',
@@ -53,6 +57,9 @@ class EbookController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
             'description' => ['required'],
+            'edition' => ['required'],
+            'publication_year' => ['required'],
+            'thumbnail' => ['required', 'image'],
             'file' => ['required', 'file', 'mimes:pdf,docx,doc'],
         ], $messages);
 
@@ -63,6 +70,9 @@ class EbookController extends Controller
         $ebook = new Ebook();
         $ebook->title = $request->title;
         $ebook->description = $request->description;
+        $ebook->edition = $request->edition;
+        $ebook->publication_year = $request->publication_year;
+        $ebook->thumbnail = $request->file('thumbnail')->store('ebooks');
         $ebook->file = $request->file('file')->store('ebooks');
         $ebook->admin_id = Auth::guard('admin')->user()->id;
         $ebook->save();
@@ -78,7 +88,8 @@ class EbookController extends Controller
      */
     public function show(Ebook $ebook)
     {
-        //
+        $title = 'Detail Majalah';
+        return view('pages.ebook.show', compact('title', 'ebook'));
     }
 
     /**
@@ -106,6 +117,11 @@ class EbookController extends Controller
         $messages = [
             'title.required' => 'Judul majalah tidak boleh kosong.',
             'description.required' => 'Deskripsi majalah tidak boleh kosong.',
+            'edition.required' => 'Edisi Majalah tidak boleh kosong',
+            'publication_year.required' => 'Tahun Terbit tidak boleh kosong',
+            'thumbnail.image' => 'Harap pilih gambar untuk post ini.',
+            'thumbnail.image' => 'Format gambar yang diterima: JPG/PNG.',
+            'file.file' => 'File Ebook harus dipilih terlebih dahulu.',
             'file.file' => 'File Ebook tidah valid.',
             'file.mimes' => 'File Ebook harus dalam format PDF, DOC, atau DOCX.',
         ];
@@ -113,6 +129,9 @@ class EbookController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
             'description' => ['required'],
+            'edition' => ['required'],
+            'publication_year' => ['required'],
+            'thumbnail' => ['nullable', 'image'],
             'file' => ['nullable', 'file', 'mimes:pdf,docx,doc'],
         ], $messages);
 
@@ -122,12 +141,16 @@ class EbookController extends Controller
 
         $ebook->title = $request->title;
         $ebook->description = $request->description;
-        $ebook->admin_id = Auth::guard('admin')->user()->id;
-
+        $ebook->edition = $request->edition;
+        $ebook->publication_year = $request->publication_year;
+        
+        if ($request->file('featured_image')) {
+            $program->featured_image = $request->file('featured_image')->store('programs');
+        }
         if ($request->file('file')) {
             $ebook->file = $request->file('file')->store('ebooks');
         }
-
+        $ebook->admin_id = Auth::guard('admin')->user()->id;
         $ebook->save();
 
         return redirect()->route('ebook.index')->with('success', 'Berhasil memperbarui data majalah.');

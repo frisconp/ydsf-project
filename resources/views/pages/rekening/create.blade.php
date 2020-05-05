@@ -28,12 +28,11 @@
                     value="{{ old('number') }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="type" class="form-control-label">Type</label>
-                <select class="custom-select my-1 mr-sm-2" name="type">
-                    <option>Choose Type</option>
-                    <option value="BNI">BNI</option>
-                    <option value="Mandiri">Mandiri</option>
-                    <option value="BCA">BCA</option>
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type</label>
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="type">
+                    <option value="Bank BNI">BNI</option>
+                    <option value="Bank Mandiri">Mandiri</option>
+                    <option value="Bank BCA">BCA</option>
                 </select>
             </div>
             <a href="{{ route('rekening.index') }}" class="btn btn-secondary btn-icon" role="button"

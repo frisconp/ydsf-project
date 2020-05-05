@@ -26,6 +26,18 @@
                 <textarea name="description" id="description" class="form-control" placeholder="Masukkan deskripsi majalah" rows="3">{{ old('description') }}</textarea>
             </div>
             <div class="form-group">
+                <label for="edition" class="form-control-label">Edisi</label>
+                <input type="text" class="form-control" name="edition" placeholder="Masukkan tahun terbit majalah" value="{{ old('edition') }}">
+            </div>
+            <div class="form-group">
+                <label for="publication_year" class="form-control-label">Tahun Terbit</label>
+                <input type="text" class="form-control" name="publication_year" placeholder="Masukkan tahun terbit majalah" value="{{ old('publication_year') }}">
+            </div>
+            <div class="form-group">
+                <label for="thumbnail" class="form-control-label">Thumbnail</label>
+                <input type="file" class="form-control" name="thumbnail" id="thumbnail">
+            </div>
+            <div class="form-group">
                 <label for="file" class="form-control-label">File</label>
                 <input type="file" class="form-control" name="file" id="file">
             </div>

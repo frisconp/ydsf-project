@@ -40,4 +40,9 @@ class Ebook extends Model
     {
         return $this->belongsTo('App\Admin');
     }
+    
+    public function getThumbnailAttribute($image)
+    {
+        return Storage::url($image);
+    }
 }

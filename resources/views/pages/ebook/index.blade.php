@@ -27,8 +27,8 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Judul</th>
-                    <th scope="col">Deskripsi</th>
-                    <th scope="col">Diunggah oleh</th>
+                    <th scope="col">Edisi</th>
+                     <th scope="col">Tahun Terbit</th>
                     <th scope="col">Opsi</th>
                 </tr>
             </thead>
@@ -40,17 +40,19 @@
                 @else
                 @foreach ($ebooks as $ebook)
                 <tr>
-                    <th scope="row">
+                    <th scope="row" class="des">
                         {{ $ebook->title }}
                     </th>
-                    <td class="des">
-                        {{ $ebook->description }}                     
-                    </td>
-                    <td >
-                        {{ $ebook->admin->name }}   
+                    <td>
+                        {{ $ebook->edition }}                     
                     </td>
                     <td>
+                        {{ $ebook->publication_year }}
+                    </td>
+                    
+                    <td>
                         <a href="{{ $ebook->file }}" class="btn btn-success btn-sm"><i class="fas fa-download mr-2"></i>Download</a>
+                         <a href="{{ route('ebook.show', $ebook->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye mr-2"></i>Lihat</a>
                         <a href="{{ route('ebook.edit', $ebook->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Edit</a>
                         <a href="{{ route('ebook.destroy', $ebook->id) }}" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>
                     </td>
