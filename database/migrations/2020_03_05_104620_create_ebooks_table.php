@@ -17,7 +17,10 @@ class CreateEbooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('edition');
+            $table->string('publication_year');
             $table->text('file');
+            $table->text('thumbnail');
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();
 
