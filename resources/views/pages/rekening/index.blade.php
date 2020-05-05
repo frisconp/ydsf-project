@@ -7,7 +7,6 @@
     <strong>Sukses!</strong> {{ session('success') }}
 </div>
 @endif
-
 <div class="card">
     <div class="card-header border-0">
         <div class="row align-items-center">
