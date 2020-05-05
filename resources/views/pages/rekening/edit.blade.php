@@ -15,15 +15,15 @@
                 <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Yayasan" value="{{ old('name') ?? $rekening->name}}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="number" class="form-control-label">Account Number</label>
+                <label for="number" class="form-control-label">Nomor Rekening</label>
                 <input type="text" class="form-control" name="account_number" placeholder="Masukkan nomor rekening" value="{{ old('account_number') ?? $rekening->account_number}}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="type" class="form-control-label">Type</label>
-                <select class="custom-select my-1 mr-sm-2" name="type">
-                    <option value="Bank BNI">BNI</option>
-                    <option value="Bank Mandiri">Mandiri</option>
-                    <option value="Bank BCA">BCA</option>
+                <label for="type" class="form-control-label">Jenis Akun</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="Bank BNI" {{ old('type') ?? $rekening->type == 'Bank BNI' ? 'selected' : null }}>Bank BNI</option>
+                    <option value="Bank Mandiri" {{ old('type') ?? $rekening->type == 'Bank Mandiri' ? 'selected' : null }}>Bank Mandiri</option>
+                    <option value="Bank BCA" {{ old('type') ?? $rekening->type == 'Bank BNI' ? 'selected' : null }}>Bank BCA</option>
                 </select>
             </div>
             <a href="{{ route('rekening.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
@@ -35,28 +35,3 @@
     </div>
 </div>
 @endsection
-
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.css') }}">
-@endsection
-
-@section('script')
-<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.js') }}"></script>
-<script src="{{ asset('assets/vendor/ckeditor5/ckeditor.js') }}"></script>
-<script>
-    ClassicEditor
-    .create(document.querySelector('#description'), {
-        removePlugins: [ 'Heading', 'Link' ],
-        toolbar: [ 'bold', 'italic' ]
-    })
-    .then(editor => {
-        console.log(editor);
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',
-    });
-</script>

@@ -19,20 +19,18 @@
             @csrf
             <div class="form-group">
                 <label for="name" class="form-control-label">Nama</label>
-                <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Yayasan"
-                    value="{{ old('name') }}" autocomplete="off">
+                <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Yayasan" value="{{ old('name') }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="number" class="form-control-label">Account Number</label>
-                <input type="text" class="form-control" name="number" placeholder="Masukkan nomor rekening"
-                    value="{{ old('number') }}" autocomplete="off">
+                <label for="account_number" class="form-control-label">Nomor Rekening</label>
+                <input type="text" class="form-control" name="number" placeholder="Masukkan nomor rekening" value="{{ old('number') }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type</label>
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="type">
-                    <option value="Bank BNI">BNI</option>
-                    <option value="Bank Mandiri">Mandiri</option>
-                    <option value="Bank BCA">BCA</option>
+                <label for="type" class="form-control-label">Jenis Akun</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="Bank BNI">Bank BNI</option>
+                    <option value="Bank Mandiri">Bank Mandiri</option>
+                    <option value="Bank BCA">Bank BCA</option>
                 </select>
             </div>
             <a href="{{ route('rekening.index') }}" class="btn btn-secondary btn-icon" role="button"
@@ -45,28 +43,3 @@
     </div>
 </div>
 @endsection
-
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/vendor/jquery-ui/jquery-ui.css') }}">
-@endsection
-
-@section('script')
-<script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.js') }}"></script>
-<script src="{{ asset('assets/vendor/ckeditor5/ckeditor.js') }}"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#description'), {
-            removePlugins: ['Heading', 'Link'],
-            toolbar: ['bold', 'italic']
-        })
-        .then(editor => {
-            console.log(editor);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',
-    });
-</script>
