@@ -17,10 +17,6 @@
                 <input type="text" class="form-control" name="title" placeholder="Masukkan judul program" value="{{ old('title') }}" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="slug" class="form-control-label">Slug</label>
-                <input type="text" class="form-control" name="slug" placeholder="Masukkan slug post" value="{{ old('slug') }}" autocomplete="off">
-            </div>
-            <div class="form-group">
                 <label for="short_description" class="form-control-label">Deskripsi Singkat</label>
                 <input type="text" class="form-control" name="short_description" placeholder="Masukkan Deskripsi singkat post" value="{{ old('short_description') }}" autocomplete="off">
             </div>
@@ -28,7 +24,7 @@
                 <label for="content" class="form-control-label">Content</label>
                 <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
             </div>
-            
+
             <a href="{{ route('post.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
             <button type="submit" class="btn btn-default btn-icon">
                 <span class="btn-inner--icon"><i class="fas fa-plus-square"></i></span>

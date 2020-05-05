@@ -18,16 +18,16 @@ Route::post('/register', 'API\RegisterController@register');
 Route::post('/login', 'API\LoginController@validateLogin');
 
 Route::group(['prefix' => 'program'], function () {
-    Route::get('/all', 'API\ProgramController@getAll');
-    Route::get('/{program}', 'API\ProgramController@getById');
+    Route::get('/{slug}', 'API\ProgramController@getBySlug');
 });
+Route::resource('program', 'API\ProgramController');
 
-Route::group(['prefix' => 'branch-office'], function () {
-    Route::get('/all', 'API\BranchOfficeController@all');
-    Route::get('/{branchOffice}', 'API\BranchOfficeController@getById');
+Route::group(['prefix' => 'post'], function () {
+    Route::get('/{slug}', 'API\PostController@getBySlug');
 });
-
 Route::resource('post', 'API\PostController');
+
+Route::resource('branch-office', 'API\BranchOfficeController');
 Route::resource('ebook', 'API\EbookController');
 
 Route::group(['middleware' => ['auth:api']], function () {
