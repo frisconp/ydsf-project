@@ -38,10 +38,10 @@
                 @else
                 @foreach ($posts as $post)
                 <tr>
-                    <th scope="row">
+                    <th scope="row" class="column">
                         {{ $post->title}}
                     </th>
-                    <td class="des">
+                    <td class="column">
                         {{ $post->short_description }}
                     </td>
                     <td>

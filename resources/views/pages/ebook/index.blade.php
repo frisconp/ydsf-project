@@ -35,7 +35,7 @@
             <tbody>
                 @if ($ebooks->count() == 0)
                 <tr>
-                    <td colspan="5">Belum ada majalah yang diunggah, <a href="#">unggah sekarang</a>.</td>
+                    <td colspan="5">Belum ada majalah yang diunggah, <a href="{{ route('ebook.create') }}">unggah sekarang</a>.</td>
                 </tr>
                 @else
                 @foreach ($ebooks as $ebook)
