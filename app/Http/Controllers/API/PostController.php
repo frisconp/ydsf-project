@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return $this->sendResponse($posts, 'Berhasil mendapatkan data artikel.');
+        return $this->sendResponse($posts->load('admin'), 'Berhasil mendapatkan data artikel.');
     }
 
     public function show(Post $post)
@@ -21,6 +21,13 @@ class PostController extends Controller
             return $this->sendError('Artikel tidak ditemukan.');
         }
 
-        return $this->sendResponse($post, 'Berhasil mendapatkan detail artikel.');
+        return $this->sendResponse($post->load('admin'), 'Berhasil mendapatkan detail artikel.');
+    }
+
+    public function getBySlug($slug)
+    {
+        $post = Post::where('slug', $slug)->first();
+
+        return $this->sendResponse($post->load('admin'), 'Berhasil mendapatkan detail artikel.');
     }
 }

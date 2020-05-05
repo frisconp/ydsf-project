@@ -6,6 +6,7 @@ use App\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ProgramController extends Controller
 {
@@ -65,6 +66,7 @@ class ProgramController extends Controller
 
         $program = new Program();
         $program->title = $request->title;
+        $program->slug = Str::slug($request->title);
         $program->description = $request->description;
         $program->location = $request->location;
         $program->amount = $request->amount;

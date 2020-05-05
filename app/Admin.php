@@ -26,6 +26,11 @@ class Admin extends Authenticatable
         return $this->belongsTo('App\BranchOffice', 'branch_office_id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
     public function ebooks()
     {
         return $this->hasMany('App\Ebook');

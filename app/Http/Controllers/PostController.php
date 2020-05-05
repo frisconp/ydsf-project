@@ -6,7 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $title = 'Post';
+        $title = 'Artikel';
         $posts = Post::all();
 
         return view('pages.post.index', compact('title', 'posts'));
@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $title = 'Buat Post';
+        $title = 'Buat Artikel';
 
         return view('pages.post.create', compact('title'));
     }
@@ -39,7 +39,6 @@ class PostController extends Controller
             'featured_image.required' => 'Harap pilih gambar untuk post ini.',
             'featured_image.image' => 'Format gambar yang diterima: JPG/PNG.',
             'title.required' => 'Judul post tidak boleh kosong.',
-            'slug.required' => 'Slug tidak boleh kosong.',
             'short_description.required' => 'Deskripsi post tidak boleh kosong.',
             'content.required' => 'Content untuk post tidak boleh kosong.',
         ];
@@ -47,18 +46,17 @@ class PostController extends Controller
         $validator = Validator::make($request->all(), [
             'featured_image' => ['required', 'image'],
             'title' => ['required'],
-            'slug' => ['required'],
             'short_description' => ['required'],
             'content' => ['required'],
         ], $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('post.index')->withErrors($validator)->withInput();
+            return redirect()->route('post.create')->withErrors($validator)->withInput();
         }
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = Str::slug($request->title);
         $post->short_description = $request->short_description;
         $post->content = $request->content;
         $post->featured_image = $request->file('featured_image')->store('posts');
@@ -107,7 +105,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->short_description = $request->short_description;
         $post->content = $request->content;
-       
+
         if ($request->file('featured_image')) {
             $post->featured_image = $request->file('featured_image')->store('posts');
         }
