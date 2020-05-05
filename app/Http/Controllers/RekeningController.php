@@ -21,12 +21,12 @@ class RekeningController extends Controller
     public function create()
     {
         $title = 'Tambah Rekening';
-
         return view('pages.rekening.create', compact('title'));
     }
 
     public function store(Request $request)
     {
+        
         $messages = [
             'name.required' => 'Nama tidak boleh kosong.',
             'number.required' => 'Nomor Rekening tidak boleh kosong.',
@@ -40,7 +40,7 @@ class RekeningController extends Controller
         ], $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('rekening.index')->withErrors($validator)->withInput();
+            return redirect()->route('rekening.create')->withErrors($validator)->withInput();
         }
 
         $donation_accounts = new DonationAccount();

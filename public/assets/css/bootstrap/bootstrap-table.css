@@ -1,0 +1,13 @@
+
+.des {
+    overflow: hidden;
+    max-width: 250px;
+    white-space:pre;
+    word-break: break-word;
+    white-space: -o-pre-wrap; 
+    white-space: -moz-pre-wrap; 
+    white-space: -pre-wrap; 
+}
+table{
+    width: 100%;
+}

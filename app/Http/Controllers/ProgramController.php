@@ -30,8 +30,9 @@ class ProgramController extends Controller
     public function create()
     {
         $title = 'Buat Program';
+        $type = ['BNI','Mandiri'];
 
-        return view('pages.program.create', compact('title'));
+        return view('pages.program.create', compact('title','type'));
     }
 
     /**

@@ -20,8 +20,13 @@
             </div>
             <div class="form-group">
                 <label for="type" class="form-control-label">Type</label>
-                     <input type="text" class="form-control" name="type" placeholder="Masukkan Jenis Transfer" value="{{ old('type') ?? $rekening->type}}" autocomplete="off">
-             </div>
+                <select class="custom-select my-1 mr-sm-2" name="type">
+                    <option>Choose Type</option>
+                    <option value="BNI">BNI</option>
+                    <option value="Mandiri">Mandiri</option>
+                    <option value="BCA">BCA</option>
+                </select>
+            </div>
             <a href="{{ route('rekening.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
             <button type="submit" class="btn btn-default btn-icon">
                 <span class="btn-inner--icon"><i class="fas fa-plus-square"></i></span>

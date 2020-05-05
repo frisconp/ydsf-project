@@ -41,7 +41,7 @@
                     <th scope="row">
                         {{ $post->title}}
                     </th>
-                    <td>
+                    <td class="des">
                         {{ $post->short_description }}
                     </td>
                     <td>

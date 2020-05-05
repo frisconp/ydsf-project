@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -41,11 +43,11 @@
                     <th scope="row">
                         {{ $ebook->title }}
                     </th>
-                    <td>
-                        {{ $ebook->description }}
+                    <td class="des">
+                        {{ $ebook->description }}                     
                     </td>
-                    <td>
-                        {{ $ebook->admin->name }}
+                    <td >
+                        {{ $ebook->admin->name }}   
                     </td>
                     <td>
                         <a href="{{ $ebook->file }}" class="btn btn-success btn-sm"><i class="fas fa-download mr-2"></i>Download</a>
