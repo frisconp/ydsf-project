@@ -30,6 +30,8 @@ Route::resource('post', 'API\PostController');
 Route::resource('branch-office', 'API\BranchOfficeController');
 Route::resource('ebook', 'API\EbookController');
 
+Route::get('/donation-account/{branch_office_id}', 'API\DonationAccountController@getByBranchOfficeId');
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'donation'], function () {
         Route::post('/add', 'API\DonationController@addDonation');
