@@ -36,4 +36,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'donation'], function () {
         Route::post('/add', 'API\DonationController@addDonation');
     });
+
+    Route::post('/change-password', 'API\AuthController@changePassword');
 });
