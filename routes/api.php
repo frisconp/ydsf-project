@@ -32,6 +32,12 @@ Route::resource('ebook', 'API\EbookController');
 
 Route::get('/donation-account/{branch_office_id}', 'API\DonationAccountController@getByBranchOfficeId');
 
+Route::group(['prefix' => 'password', 'namespace' => 'API'], function () {
+    Route::post('/create', 'PasswordResetController@create');
+    Route::get('/find/{token}', 'PasswordResetController@find');
+    Route::post('/reset','PasswordResetController@reset');
+});
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'donation'], function () {
         Route::post('/add', 'API\DonationController@addDonation');
