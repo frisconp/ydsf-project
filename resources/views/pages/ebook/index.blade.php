@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -28,7 +26,7 @@
                 <tr>
                     <th scope="col">Judul</th>
                     <th scope="col">Edisi</th>
-                     <th scope="col">Tahun Terbit</th>
+                    <th scope="col">Tahun Terbit</th>
                     <th scope="col">Opsi</th>
                 </tr>
             </thead>
@@ -44,15 +42,16 @@
                         {{ $ebook->title }}
                     </th>
                     <td>
-                        {{ $ebook->edition }}                     
+                        {{ $ebook->edition }}
                     </td>
                     <td>
                         {{ $ebook->publication_year }}
                     </td>
-                    
+
                     <td>
+                        
                         <a href="{{ $ebook->file }}" class="btn btn-success btn-sm"><i class="fas fa-download mr-2"></i>Download</a>
-                         <a href="{{ route('ebook.show', $ebook->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye mr-2"></i>Lihat</a>
+                        <a href="{{ route('ebook.show', $ebook->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye mr-2"></i>Lihat</a>
                         <a href="{{ route('ebook.edit', $ebook->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Edit</a>
                         <a href="{{ route('ebook.destroy', $ebook->id) }}" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>
                     </td>
@@ -95,8 +94,9 @@
 
 @section('script')
 <script>
-    $('#deleteModal').on('show.bs.modal', function (e) {
+    $('#deleteModal').on('show.bs.modal', function(e) {
         $('#delete-form').attr('action', e.relatedTarget.getAttribute('href'));
     });
+
 </script>
 @endsection

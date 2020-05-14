@@ -26,4 +26,13 @@ class ProgramController extends Controller
 
         return $this->sendResponse($program->load('office', 'updates'), 'Data program berhasil didapatkan.');
     }
+
+    public function getCompletedProgram()
+    {
+        $program = Program::where('status', 'Terlaksana')->count();
+
+        return $this->sendResponse($program, 'Berhasil mendapatkan jumlah program terlaksana');
+        
+    }
+    
 }

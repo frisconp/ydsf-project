@@ -19,6 +19,10 @@ Route::post('/login', 'API\LoginController@validateLogin');
 
 Route::group(['prefix' => 'program'], function () {
     Route::get('/{slug}', 'API\ProgramController@getBySlug');
+    Route::get('/status/completed', 'API\ProgramController@getCompletedProgram');
+
+    // itu biar beda
+    //ewait aku tak memahami
 });
 Route::resource('program', 'API\ProgramController');
 
