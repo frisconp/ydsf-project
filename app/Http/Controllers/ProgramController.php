@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -22,6 +23,7 @@ class ProgramController extends Controller
 
         return view('pages.program.index', compact('title', 'programs'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -162,4 +164,12 @@ class ProgramController extends Controller
 
         return redirect()->route('program.index')->with('success', 'Berhasil menghapus program '.$programTitle.'.');
     }
+
+    public function updateProgram(Request $request)
+    {
+        $update = Program::where('id', $request->id)->update(['status' => 'Terlaksana']);
+        return redirect()->route('program.index');
+        
+    }
+    
 }

@@ -24,13 +24,9 @@
                 <th>Deskripsi Singkat</th>
                 <td>{{ $post->short_description }}</td>
             </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ $post->content }}</td>
-            </tr>
         </table>
         <div class="my-4">
-            {!! $post->description !!}
+            {!! $post->content !!}
         </div>
         <div>
             <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary"><i class="fas fa-edit mr-2"></i>Edit</a>

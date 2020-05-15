@@ -19,25 +19,32 @@
             </div>
             <div class="form-group">
                 <label for="title" class="form-control-label">Judul Program</label>
-                <input type="text" class="form-control" name="title" placeholder="Masukkan judul program" value="{{ old('title') ?? $program->title }}">
+                <input type="text" class="form-control" name="title" placeholder="Masukkan judul program"
+                    value="{{ old('title') ?? $program->title }}">
             </div>
             <div class="form-group">
                 <label for="held_on" class="form-control-label">Tanggal Pelaksanaan</label>
-                <input type="text" class="form-control datepicker" name="held_on" value="{{ old('held_on') ?? $program->held_on }}">
+                <input type="text" class="form-control datepicker" name="held_on"
+                    value="{{ old('held_on') ?? $program->held_on }}">
             </div>
             <div class="form-group">
                 <label for="description" class="form-control-label">Deskripsi</label>
-                <textarea name="description" id="description" class="form-control" placeholder="Masukkan deskripsi program" rows="3">{{ old('description') ?? $program->description }}</textarea>
+                <textarea name="description" id="description" class="form-control"
+                    placeholder="Masukkan deskripsi program"
+                    rows="3">{{ old('description') ?? $program->description }}</textarea>
             </div>
             <div class="form-group">
                 <label for="location" class="form-control-label">Lokasi</label>
-                <input type="text" class="form-control" name="location" placeholder="Masukkan alamat lokasi" value="{{ old('location') ?? $program->location }}">
+                <input type="text" class="form-control" name="location" placeholder="Masukkan alamat lokasi"
+                    value="{{ old('location') ?? $program->location }}">
             </div>
             <div class="form-group">
                 <label for="amount" class="form-control-label">Jumlah donasi yang dibutuhkan</label>
-                <input type="text" class="form-control" name="amount" placeholder="Masukkan jumlah donasi" value="{{ old('amount') ?? $program->amount }}">
+                <input type="text" class="form-control" name="amount" placeholder="Masukkan jumlah donasi"
+                    value="{{ old('amount') ?? $program->amount }}">
             </div>
-            <a href="{{ route('program.index') }}" class="btn btn-secondary btn-icon" role="button" aria-pressed="true">Batal</a>
+            <a href="{{ route('program.index') }}" class="btn btn-secondary btn-icon" role="button"
+                aria-pressed="true">Batal</a>
             <button type="submit" class="btn btn-default btn-icon">
                 <span class="btn-inner--icon"><i class="fas fa-save"></i></span>
                 <span class="btn-inner--text">Perbarui</span>
@@ -56,16 +63,16 @@
 <script src="{{ asset('assets/vendor/ckeditor5/ckeditor.js') }}"></script>
 <script>
     ClassicEditor
-    .create(document.querySelector('#description'), {
-        removePlugins: [ 'Heading', 'Link' ],
-        toolbar: [ 'bold', 'italic' ]
-    })
-    .then(editor => {
-        console.log(editor);
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        .create(document.querySelector('#description'), {
+            removePlugins: ['Heading', 'Link'],
+            toolbar: ['bold', 'italic']
+        })
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
     $('.datepicker').datepicker({
         dateFormat: 'yy-mm-dd',

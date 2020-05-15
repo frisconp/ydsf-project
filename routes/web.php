@@ -30,4 +30,6 @@ Route::group(['middleware' => ['auth.admin']], function () {
     Route::resource('rekening', 'RekeningController');
     Route::resource('post', 'PostController');
     Route::resource('ebook', 'EbookController');
+
+    Route::get('/complete/{id}','ProgramController@updateProgram');
 });

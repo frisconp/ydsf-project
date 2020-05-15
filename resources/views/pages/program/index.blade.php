@@ -25,6 +25,7 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Judul</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Diperbarui</th>
                     <th scope="col">Opsi</th>
                 </tr>
@@ -37,13 +38,17 @@
                 @else
                 @foreach ($programs as $program)
                 <tr>
-                    <th scope="row">
-                        {{ $program->title }}
+                    <th scope="row" class="column">
+                        {{ $program->title}}
                     </th>
+                    <td>
+                        {{ $program->status }}
+                    </td>
                     <td>
                         {{ $program->updated_at }}
                     </td>
                     <td>
+                        <a id="one" href="{{ asset('/complete')}}/{{$program->id}}" class="btn btn-success btn-sm {{ $program->status != 'Terlaksana' ?: 'disabled' }}" data-toggle="modal" data-target="#updateModal"><i class="fas fa-sync mr-2"></i>Ubah Status</a>
                         <a href="{{ route('program.show', $program->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye mr-2"></i>Lihat</a>
                         <a href="{{ route('program.edit', $program->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Edit</a>
                         <a href="{{ route('program.destroy', $program->id) }}" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>
@@ -83,12 +88,50 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Konfirmasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" method="POST" id="update-form">
+                @method('GET')
+                @csrf
+                <div class="modal-body">
+                    Anda yakin ingin mengubah status program?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-primary">Ya,ubah sekarang!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
+
 <script>
-    $('#deleteModal').on('show.bs.modal', function (e) {
+    $('#deleteModal').on('show.bs.modal', function(e) {
         $('#delete-form').attr('action', e.relatedTarget.getAttribute('href'));
     });
+
+</script>
+<script>
+    $('#updateModal').on('show.bs.modal', function(e) {
+        $('#update-form').attr('action', e.relatedTarget.getAttribute('href'));
+    });
+
+</script>
+<script>
+    $('#one').one('submit', function() {
+        $(this).find('input[type="submit"]').attr('disabled', 'disabled');
+    });
+
 </script>
 @endsection
