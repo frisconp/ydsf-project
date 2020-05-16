@@ -37,9 +37,6 @@
                             class="fas fa-download mr-2"></i>Download</a>
 
                 </td>
-                {{-- <td>
-                    <iframe src="{{ $ebook->file }}" width="40%" height="70%"></iframe>
-                </td> --}}
             </tr>
         </table>
         <div class="my-4">

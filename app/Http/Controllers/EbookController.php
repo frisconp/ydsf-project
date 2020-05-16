@@ -144,8 +144,8 @@ class EbookController extends Controller
         $ebook->edition = $request->edition;
         $ebook->publication_year = $request->publication_year;
         
-        if ($request->file('featured_image')) {
-            $program->featured_image = $request->file('featured_image')->store('programs');
+        if ($request->file('thumbnail')) {
+            $ebook->thumbnail = $request->file('thumbnail')->store('ebooks');
         }
         if ($request->file('file')) {
             $ebook->file = $request->file('file')->store('ebooks');
