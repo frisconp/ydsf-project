@@ -51,6 +51,28 @@ class Program extends Model
         return Storage::url($image);
     }
 
+    public function getCreatedAtAttribute($date)
+    {
+        $months = [
+            1 => 'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+
+        $splitedDate = explode('-', date('Y-m-d', strtotime($date)));
+
+        return $splitedDate[2] . ' ' . $months[(int) $splitedDate[1]] . ' ' . $splitedDate[0];
+    }
+
     public function getDaysLeftAttribute()
     {
         $today = Carbon::now();
