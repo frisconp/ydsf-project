@@ -6,22 +6,40 @@ use App\Donation;
 use App\Http\Controllers\API\BaseController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class DonationController extends Controller
 {
     public function addDonation(Request $request)
     {
-        $donation = Donation::create([
-            'user_id' => $request->user_id,
-            'program_id' => $request->program_id,
-            'donation_account_id' => $request->donation_account_id,
-            'donation_unique_number' => Str::random(8),
-            'message' => $request->message,
-            'amount' => $request->amount,
-            'status' => 'waiting'
+        $validator = Validator::make($request->all(), [
+            'program_id' => ['required'],
+            'donation_account_id' => ['required'],
+            'message' => ['max:255'],
+            'amount' => ['required'],
+        ], [
+            'program_id.required' => 'ID Program tidak boleh kosong.',
+            'donation_account_id.required' => 'ID Rekening tidak boleh kosong.',
+            'message.max' => 'Pesan terlalu panjang, maksimal 255 karakter.',
+            'amount.required' => 'Jumlah donasi tidak boleh kosong.',
         ]);
 
-        return $this->sendResponse($donation, 'Data donasi berhasil ditambahkan.');
+        if ($validator->fails()) {
+            return $this->sendError('Gagal menyimpan data donasi.', $validator->errors(), 400);
+        } else {
+            $donation = new Donation();
+            $donation->user_id = Auth::user()->id;
+            $donation->program_id = $request->program_id;
+            $donation->donation_account_id = $request->donation_account_id;
+            $donation->unique_number = rand(100, 999);
+            $donation->show_as_anonymous = $request->show_as_anonymous ? true : false;
+            $donation->message = $request->message;
+            $donation->amount = $request->amount;
+            $donation->status = 'waiting';
+            $donation->save();
+
+            return $this->sendResponse($donation->load(['program', 'donationAccount']), 'Donasi berhasil ditambahkan.');
+        }
     }
 }
