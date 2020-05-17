@@ -45,6 +45,7 @@ Route::group(['prefix' => 'password', 'namespace' => 'API'], function () {
 Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'donation'], function () {
         Route::post('/add', 'API\DonationController@addDonation');
+        Route::get('/detail/{token}', 'API\DonationController@detail');
     });
 
     Route::post('/change-password', 'API\AuthController@changePassword');

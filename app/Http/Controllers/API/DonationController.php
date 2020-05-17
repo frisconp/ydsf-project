@@ -28,18 +28,42 @@ class DonationController extends Controller
         if ($validator->fails()) {
             return $this->sendError('Gagal menyimpan data donasi.', $validator->errors(), 400);
         } else {
+            $uniqueToken = false;
+
+            while (! $uniqueToken) {
+                $token = Str::random(16);
+
+                $checkToken = Donation::where('token', $token)->exists();
+
+                if (! $checkToken) {
+                    $uniqueToken = true;
+                }
+            }
+
             $donation = new Donation();
             $donation->user_id = Auth::user()->id;
             $donation->program_id = $request->program_id;
             $donation->donation_account_id = $request->donation_account_id;
             $donation->unique_number = rand(100, 999);
+            $donation->token = $token;
             $donation->show_as_anonymous = $request->show_as_anonymous ? true : false;
             $donation->message = $request->message;
             $donation->amount = $request->amount;
             $donation->status = 'waiting';
             $donation->save();
 
-            return $this->sendResponse($donation->load(['program', 'donationAccount']), 'Donasi berhasil ditambahkan.');
+            return $this->sendResponse(null, 'Donasi berhasil ditambahkan.');
+        }
+    }
+
+    public function detail($token)
+    {
+        $donation = Donation::where('token', $token)->first();
+
+        if (! $donation) {
+            return $this->sendError('Maaf, informasi donasi tidak ditemukan.');
+        } else {
+            return $this->sendResponse($donation, 'Berhasil mendapatkan data donasi.');
         }
     }
 }

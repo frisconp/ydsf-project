@@ -19,6 +19,7 @@ class CreateDonationsTable extends Migration
             $table->unsignedBigInteger('program_id');
             $table->unsignedBigInteger('donation_account_id');
             $table->integer('unique_number');
+            $table->string('token')->unique();
             $table->boolean('show_as_anonymous');
             $table->string('message');
             $table->integer('amount');
