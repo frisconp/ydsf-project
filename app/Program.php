@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Program extends Model
 {
     protected $appends = [
-        'days_left', 'held_on_formatted'
+        'days_left', 'held_on_formatted', 'progress_percentage'
     ];
 
     public function getHeldOnFormattedAttribute()
@@ -88,5 +88,21 @@ class Program extends Model
     public function office()
     {
         return $this->belongsTo('App\BranchOffice', 'branch_office_id');
+    }
+
+    public function getProgressPercentageAttribute()
+    {
+        $donationTarget = $this->amount;
+        $donationTotal = Donation::where(['program_id' => $this->id, 'status' => 'accepted'])->get();
+
+        $donationTotal = $donationTotal->sum('amount');
+
+        $progressPercentage = ($donationTotal/$donationTarget) * 100;
+
+        if ($progressPercentage > 100) {
+            $progressPercentage = 100;
+        }
+
+        return (int) $progressPercentage;
     }
 }
