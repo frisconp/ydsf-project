@@ -32,7 +32,5 @@ class ProgramController extends Controller
         $program = Program::where('status', 'Terlaksana')->count();
 
         return $this->sendResponse($program, 'Berhasil mendapatkan jumlah program terlaksana');
-        
     }
-    
 }
