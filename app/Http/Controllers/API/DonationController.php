@@ -24,4 +24,11 @@ class DonationController extends Controller
 
         return $this->sendResponse($donation, 'Data donasi berhasil ditambahkan.');
     }
+
+    public function getAllDonation()
+    {
+        $donation = Donation::get()->sum('amount');
+
+        return $this->sendResponse($donation, 'Berhasil mendapatkan total donasi yang terkumpul.');
+    }
 }
