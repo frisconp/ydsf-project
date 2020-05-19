@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Donation;
 use App\Http\Controllers\API\BaseController as Controller;
+use App\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,12 +31,12 @@ class DonationController extends Controller
         } else {
             $uniqueToken = false;
 
-            while (! $uniqueToken) {
+            while (!$uniqueToken) {
                 $token = Str::random(16);
 
                 $checkToken = Donation::where('token', $token)->exists();
 
-                if (! $checkToken) {
+                if (!$checkToken) {
                     $uniqueToken = true;
                 }
             }
@@ -60,7 +61,7 @@ class DonationController extends Controller
     {
         $donation = Donation::where('token', $token)->first();
 
-        if (! $donation) {
+        if (!$donation) {
             return $this->sendError('Maaf, informasi donasi tidak ditemukan.');
         } else {
             return $this->sendResponse($donation, 'Berhasil mendapatkan data donasi.');
@@ -69,8 +70,24 @@ class DonationController extends Controller
 
     public function getAllDonation()
     {
-        $donation = Donation::where('status','accept')->sum('amount');
+        $donation = Donation::where('status', 'accept')->sum('amount');
 
         return $this->sendResponse($donation, 'Berhasil mendapatkan total donasi yang terkumpul.');
+    }
+
+    public function getByProgramId($programId)
+    {
+        $program = Program::find($programId);
+
+        if ($program) {
+            $donations = Donation::where([
+                'program_id' => $programId,
+                'status' => 'accepted',
+            ])->with('user')->get();
+
+            return $this->sendResponse($donations, 'Data donasi berhasil didapatkan.');
+        } else {
+            return $this->sendError('Program tidak ditemukan.');
+        }
     }
 }
