@@ -59,7 +59,7 @@ class DonationController extends Controller
 
     public function detail($token)
     {
-        $donation = Donation::where('token', $token)->first();
+        $donation = Donation::where('token', $token)->with('user', 'program', 'donationAccount')->first();
 
         if (!$donation) {
             return $this->sendError('Maaf, informasi donasi tidak ditemukan.');

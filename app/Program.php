@@ -105,4 +105,9 @@ class Program extends Model
 
         return (int) $progressPercentage;
     }
+
+    public function donation()
+    {
+        return $this->hasMany('App\Donation');
+    }
 }

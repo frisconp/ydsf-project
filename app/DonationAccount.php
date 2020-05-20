@@ -12,4 +12,9 @@ class DonationAccount extends Model
     {
         return $this->belongsTo('App\BranchOffice', 'branch_office_id');
     }
+
+    public function donation()
+    {
+        return $this->hasMany('App\Donation');
+    }
 }
