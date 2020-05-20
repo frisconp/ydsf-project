@@ -53,7 +53,7 @@ class DonationController extends Controller
             $donation->status = 'waiting';
             $donation->save();
 
-            return $this->sendResponse(null, 'Donasi berhasil ditambahkan.');
+            return $this->sendResponse($donation, 'Donasi berhasil ditambahkan.');
         }
     }
 
