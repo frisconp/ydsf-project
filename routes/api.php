@@ -29,6 +29,10 @@ Route::group(['prefix' => 'post'], function () {
 Route::resource('post', 'API\PostController');
 
 Route::resource('branch-office', 'API\BranchOfficeController');
+
+Route::group(['prefix' => 'ebook'], function () {
+    Route::get('/search', 'API\EbookController@searchByTitle');
+});
 Route::resource('ebook', 'API\EbookController');
 
 Route::get('/donation-account/{branch_office_id}', 'API\DonationAccountController@getByBranchOfficeId');

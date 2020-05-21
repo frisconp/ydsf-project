@@ -89,4 +89,16 @@ class EbookController extends Controller
     {
         //
     }
+
+    public function searchByTitle(Request $request)
+    {
+        $ebooks = Ebook::where('title', 'like', '%'.$request->title.'%')->get();
+
+        if ($ebooks->count() > 0) {
+            return $this->sendResponse($ebooks, 'Berhasil mendapatkan data majalah');
+        } else {
+            return $this->sendError('Data majalah tidak ditemukan.');
+        }
+
+    }
 }
