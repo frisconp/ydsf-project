@@ -85,7 +85,12 @@ class DonationController extends Controller
                 'status' => 'accepted',
             ])->with('user')->get();
 
-            return $this->sendResponse($donations, 'Data donasi berhasil didapatkan.');
+            $data = [
+                'amount' => $donations->count(),
+                'donation_list' => $donations
+            ];
+
+            return $this->sendResponse($data, 'Data donasi berhasil didapatkan.');
         } else {
             return $this->sendError('Program tidak ditemukan.');
         }
