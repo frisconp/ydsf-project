@@ -32,6 +32,38 @@ class Donation extends Model
 
     public function getPaymentDeadlineAttribute()
     {
-        return Carbon::parse($this->created_at)->addDay();
+        $paymentDeadline = Carbon::parse($this->created_at)->addDay();
+
+        $days = [
+            'Sunday' => 'Minggu',
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu'
+        ];
+
+        $months = [
+            1 => 'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+
+        $dayName = date('l', strtotime($paymentDeadline));
+
+        $splitedDate = explode('-', date('Y-m-d', strtotime($paymentDeadline)));
+        $splitedTime = explode(':', date('H:i', strtotime($paymentDeadline)));
+
+        return $days[$dayName] . ', ' . $splitedDate[2] . ' ' . $months[(int) $splitedDate[1]] . ' ' . $splitedDate[0] . ' ' . $splitedTime[0] . ':' . $splitedTime[1] . ' WIB';
     }
 }
