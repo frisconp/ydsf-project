@@ -20,9 +20,6 @@ Route::post('/login', 'API\LoginController@validateLogin');
 Route::group(['prefix' => 'program'], function () {
     Route::get('/{slug}', 'API\ProgramController@getBySlug');
     Route::get('/status/completed', 'API\ProgramController@getCompletedProgram');
-
-    // itu biar beda
-    //ewait aku tak memahami
 });
 Route::resource('program', 'API\ProgramController');
 
@@ -48,4 +45,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
 
     Route::post('/change-password', 'API\AuthController@changePassword');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/profile', 'API\UserController@getProfile');
+    });
 });
