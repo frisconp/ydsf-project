@@ -56,4 +56,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
 
     Route::post('/change-password', 'API\AuthController@changePassword');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/profile', 'API\UserController@getProfile');
+    });
 });

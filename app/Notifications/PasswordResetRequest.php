@@ -42,7 +42,7 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('api/password/find/'.$this->token);
+        $url = 'http://localhost:8080/reset_password/'.$this->token;
 
         return (new MailMessage)
                     ->line('Kami baru saja menerima permintaan Reset Password untuk akun Anda, klik tombol di bawah ini untuk melakukan Reset Password.')
