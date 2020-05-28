@@ -95,4 +95,9 @@ class DonationController extends Controller
             return $this->sendError('Program tidak ditemukan.');
         }
     }
+
+    public function history ()
+    {
+        $history = Donation::where('user_id', Auth::user()->id)->get();
+    }
 }
