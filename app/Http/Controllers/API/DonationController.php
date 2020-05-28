@@ -92,12 +92,18 @@ class DonationController extends Controller
 
             return $this->sendResponse($data, 'Data donasi berhasil didapatkan.');
         } else {
-            return $this->sendError('Program tidak ditemukan.');
+            return $this->sendError('Data donasi tidak ditemukan.');
         }
     }
 
     public function history ()
     {
         $history = Donation::where('user_id', Auth::user()->id)->get();
+
+        if($history->count() == 0){
+            return $this->sendError('Belum pernah melakukan donasi');
+        }else{
+            return $this->sendResponse($history->load('program'), 'Berhasil menampilkan data history donasi');
+        }
     }
 }
