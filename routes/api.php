@@ -60,5 +60,6 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/profile', 'API\UserController@getProfile');
+        Route::post('/update/{user}' , 'API\UserController@updateProfile');
     });
 });
