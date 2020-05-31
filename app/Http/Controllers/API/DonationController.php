@@ -106,4 +106,30 @@ class DonationController extends Controller
             return $this->sendResponse($history->load('program'), 'Berhasil menampilkan data history donasi');
         }
     }
+
+    public function upload(Request $request, Donation $donation)
+    {
+        $messages = [
+            'proof_of_payment.required' => 'Harap pilih gambar untuk post ini.',
+            'proof_of_payment.image' => 'Format gambar yang diterima: JPG/PNG.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'proof_of_payment' => ['required', 'image'],
+
+        ], $messages);
+
+        $user = Auth::user()->id;
+        if($user){
+            if ($validator->fails()) {
+                return $this->sendError('Gagal mengirimkan bukti', $validator->errors(), 400);
+            } else {
+
+                $donation->proof_of_payment = $request->file('proof_of_payment')->store('bukti');
+                $donation->save();
+
+                return $this->sendResponse($donation, 'Berhasil mengupload bukti transfer');
+            }
+        }
+    }
 }
