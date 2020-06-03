@@ -17,6 +17,8 @@ Route::get('/login', 'LoginController@index')->name('login');
 Route::get('/logout', 'LoginController@logout')->name('logout');
 Route::post('/login-auth', 'LoginController@authenticate');
 
+Route::get('/invoice/{token}', 'DonationController@showInvoice');
+
 Route::group(['middleware' => ['auth.admin']], function () {
     Route::get('/', function () {
         $title = 'Halaman Utama';

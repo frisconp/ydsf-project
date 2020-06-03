@@ -62,4 +62,8 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::get('/profile', 'API\UserController@getProfile');
         Route::post('/update/{user}' , 'API\UserController@updateProfile');
     });
+
+    Route::group(['prefix' => 'donation'], function () {
+        Route::get('/invoice/{token}', 'API\DonationController@sendInvoice');
+    });
 });

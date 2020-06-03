@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Donation;
 use App\Http\Controllers\API\BaseController as Controller;
+use App\Notifications\SendInvoice;
 use App\Program;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -130,6 +132,20 @@ class DonationController extends Controller
 
                 return $this->sendResponse($donation, 'Berhasil mengupload bukti transfer');
             }
+        }
+    }
+
+    public function sendInvoice(Request $request, $token)
+    {
+        $donation = Donation::where('token', $token)->first();
+
+        if ($donation) {
+            $user = User::find($request->user()->id);
+            $user->notify(new SendInvoice($token));
+
+            return $this->sendResponse($donation, 'Tautan Invoice berhasil dikirim ke email Anda.');
+        } else {
+            return $this->sendError('Gagal mengirim tautan invoice.');
         }
     }
 }

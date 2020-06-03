@@ -7,12 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PasswordResetRequest extends Notification
+class SendInvoice extends Notification
 {
     use Queueable;
 
     protected $token;
-
     /**
      * Create a new notification instance.
      *
@@ -42,13 +41,14 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = 'http://localhost:8080/reset_password/'.$this->token;
+        $url = 'http://127.0.0.1:8000/invoice/' . $this->token;
 
         return (new MailMessage)
-                    ->subject('Reset Kata Sandi Anda')
-                    ->line('Kami baru saja menerima permintaan Reset Password untuk akun Anda, klik tombol di bawah ini untuk melakukan Reset Password.')
-                    ->action('Reset Password', url($url))
-                    ->line('Jika Anda merasa tidak melakukannya, harap abaikan e-mail ini.');
+                    ->subject('Tautan Bukti Donasi Anda')
+                    ->greeting('Halo!')
+                    ->line('Berikut merupakan tautan untuk mengakses bukti donasi Anda.')
+                    ->action('Lihat Invoice', url($url))
+                    ->line('Jika Anda merasa tidak melakukannya, maka abaikan email ini.');
     }
 
     /**

@@ -41,6 +41,7 @@ class PasswordResetSuccess extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Kata Sandi Diubah')
                     ->line('Kata sandi akun Anda berhasil diganti.')
                     ->line('Jika Anda merasa melakukannya, harap abaikan e-mail ini.')
                     ->line('Jika Anda merasa tidak melakukannya, segera amankan akun Anda.');
